@@ -1,0 +1,22 @@
+{
+  "name": "allora_backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "json-server --watch test.json --port 5000",
+    "start": "nodemon --env-file=.env server.js",
+    "testDB": "node  --env-file=.env test.js"
+  },
+  "author": "Mouadh Belgoumri",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "nodemon": "^3.1.10"
+  }
+}
