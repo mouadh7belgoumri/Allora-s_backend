@@ -11,7 +11,7 @@
             "driver": "MySQL",
             "name": "mysql",
             "group": "mysql",
-            "database": "products",
+            "database": "Alloras",
             "username": "root"
         }
     ]
