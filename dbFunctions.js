@@ -46,11 +46,11 @@ async function getProduct(connectObj, id) {
         }
     }
 }
-async function addProduct(connectObj) {
+async function addProduct(connectObj, req) {
     const connection = await mysql.createConnection(connectObj);
     try {
         await connection.connect();
-        const row = await connection.execute(`INSERT into products values (5, "testProd4", 25);`)
+        const row = await connection.execute(`INSERT into products (name, price, description) values ("${req.body.name}", ${req.body.price}, "${req.body.description}");`)
         return row;
     } catch (error) {
         console.error("failed to add product", error);
@@ -61,6 +61,37 @@ async function addProduct(connectObj) {
         }
     }
 }
+async function DeleteAllProducts(connectObj) {
+    const db = await mysql.createConnection(connectObj);
+    try {
+        await db.connect();
+        const row = await db.execute("DELETE FROM products WHERE id > -1");
+        return row;
+    } catch (error) {
+        console.error("failed to empty the database", error);
+    }
+    finally {
+        if (db) {
+            db.end();
+        }
+    }
+}
+
+async function DeleteOneProduct(connectObj, id) {
+    const db = await mysql.createConnection(connectObj);
+    try {
+        await db.connect();
+        const row = await db.execute(`DELETE FROM products WHERE id = ${id}`);
+        return row;
+    } catch (error) {
+        console.error("failed to empty the database", error);
+    }
+    finally {
+        if (db) {
+            db.end();
+        }
+    }
+}
 
 
-export {getProduct, getProducts, addProduct};
+export { getProduct, getProducts, addProduct, DeleteAllProducts, DeleteOneProduct };

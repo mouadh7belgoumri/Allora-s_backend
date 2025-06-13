@@ -1,5 +1,5 @@
 import express from 'express'
-import {getProducts, getProduct, addProduct} from '../dbFunctions.js';
+import {getProducts, getProduct, addProduct, DeleteAllProducts, DeleteOneProduct} from '../dbFunctions.js';
 const productsRouter = express.Router();
 
 const connectionData = {
@@ -21,9 +21,15 @@ productsRouter.get('/:id', async (req, res)=>{
 })
 
 productsRouter.post('/', async (req, res)=>{
-    res.send(await addProduct(connectionData));
+    res.send(await addProduct(connectionData, req));
 })
 
+productsRouter.delete('/', async (req, res)=>{
+    res.send(await DeleteAllProducts(connectionData))
+})
 
+productsRouter.delete('/:id', async (req, res) => {
+    res.send(await DeleteOneProduct(connectionData, req.params.id))
+})
 
 export default productsRouter;
