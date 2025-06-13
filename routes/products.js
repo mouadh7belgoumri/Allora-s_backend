@@ -14,10 +14,10 @@ productsRouter.get("/", async (req,res)=>{
 })
 
 productsRouter.get('/:id', async (req, res)=>{
-    const rows = await getProducts(connectionData);
+    const row = await getProduct(connectionData, req.params.id);
+    console.log(row);
     
-    
-    res.send(rows[req.params.id - 1])
+    res.send(row)
 })
 
 productsRouter.post('/', async (req, res)=>{
