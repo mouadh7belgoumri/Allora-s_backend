@@ -14,9 +14,7 @@ productsRouter.get("/", async (req,res)=>{
 })
 
 productsRouter.get('/:id', async (req, res)=>{
-    const row = await getProduct(connectionData, req.params.id);
-    console.log(row);
-    
+    const row = await getProduct(connectionData, parseInt(req.params.id));
     res.send(row)
 })
 

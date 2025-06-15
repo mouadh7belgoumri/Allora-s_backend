@@ -10,20 +10,13 @@ const connectionData = {
 async function getProducts(connectObj) {
     let connection;
     try {
-
         connection = await mysql.createConnection(connectObj);
-
-
         const [rows] = await connection.execute('SELECT * FROM products');
-
-
-
         return rows;
     } catch (error) {
         console.error('Database error:', error);
         throw error;
     } finally {
-
         if (connection) {
             await connection.end();
             console.log('Connection closed');
@@ -35,8 +28,8 @@ async function getProduct(connectObj, id) {
     const connection = await mysql.createConnection(connectObj);
     try {
         await connection.connect();
-        const row = await connection.execute(`SELECT * FROM products WHERE id = ${id}`)
-        return row;
+        const [rows] = await connection.execute('SELECT * FROM products')
+        return rows.filter(row => row.id == id)[0]
     } catch (error) {
         console.error("failed to get product", error);
     }
